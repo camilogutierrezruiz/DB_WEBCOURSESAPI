@@ -382,13 +382,15 @@ select
 	courses.description,
 	course_level.name as level,
 	users.name as teacher,
-	categories_detail.categorie_id as categorie,
+	categories.name as categorie,
 	courses_videos.url as link
 from courses
 	left join course_level on courses.level = course_level.id
 	left join users on courses.teacher = users.id
-	left join categories_detail on courses.id = categories_detail.course_id  
-	left join courses_videos on courses.id = courses_videos.course_id;
+	left join categories_detail on courses.id = categories_detail.course_id
+	inner join categories on categories.id = categories_detail.categorie_id
+	left join courses_videos on courses.id = courses_videos.course_id
+	order by courses.title asc;
 
 
 
