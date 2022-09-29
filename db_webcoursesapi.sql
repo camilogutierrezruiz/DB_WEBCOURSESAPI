@@ -373,8 +373,15 @@ insert into courses_detail (
 
 select * from courses;
 
-select users.id , users.name, courses_detail.course_id from users
-	left join courses_detail on users.id = courses_detail.user_id;
+select 
+	users.id,
+	users.name as student,
+	courses.title as course
+from users
+	left join courses_detail on users.id = courses_detail.user_id
+	inner join courses on courses.id = courses_detail.course_id
+	where role_id = '407c5ab7-2a87-4149-a245-fadf9d8f78be'
+	order by users.name asc;
 	
 select
 	courses.id,
